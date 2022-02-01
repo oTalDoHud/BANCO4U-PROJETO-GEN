@@ -1,0 +1,17 @@
+package services;
+
+import entities.Usuario;
+
+public class Pagamentos {
+
+	public static void testeSaldo(double valor, Usuario newUser) {
+		if (valor > newUser.getSaldo()) {
+			//System.out.println("\nSaldo insuficiente! (Finalizando sessão...)\n");
+			String erro = "Você tentou sacar um valor acima do seu saldo";
+			throw new IllegalStateException(erro);
+		} else {
+			newUser.setSaldo(newUser.getSaldo() - valor);
+			System.out.println("\nTransferência realizada com sucesso!!!");
+		}
+	}
+}

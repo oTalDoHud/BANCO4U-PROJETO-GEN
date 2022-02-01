@@ -5,14 +5,18 @@ import java.util.Scanner;
 import entities.Usuario;
 import services.Emprestimo;
 import services.LoginConfirmacao;
+import services.Pagamentos;
 
 public class Program {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("---BEM VINDO AO BANCO4U---");
-		int op, limiteTentativas = 0, menuOp, depoOp, empreOp, totalParcelas = 0;
-		String confirmacaoSenha;
+		
+		int op, limiteTentativas = 0, menuOp, depoOp, empreOp, pagOp, tipo = 0, valor, voltar = 0, totalParcelas = 0;
+		String confirmacaoSenha, cpf, tell, chave, email;
+		double valorPag;
+		
 		Usuario newUser = new Usuario(null, null, 200);
 		
 		do {
@@ -24,7 +28,7 @@ public class Program {
 	        System.out.print("Digite aqui -->: ");
 	        op = sc.nextInt();
 	       
-	        Usuario admin = new Usuario("Admin", "Admin");
+	        Usuario admin = new Usuario("Admin","Admin");
 	        
 	        switch(op){
 	        	case 1 ://Login
@@ -82,10 +86,10 @@ public class Program {
 						        	        newUser.deposito(valorDepositado);
 						        	        System.out.println("\nValor depositado, seu saldo atual é de: " + newUser.getSaldo());
 					        	        	break;
-					        	        case 3:
+					        	        case 3://extrato
 					        	        	 System.out.println("\nSeu saldo atual é de: " + newUser.getSaldo());
 					        	        	break;
-					        	        case 0:
+					        	        case 0://sair
 					        	        	System.out.println("\nVoltando a menu");
 					        	        	break;
 					        	        default:
@@ -126,6 +130,135 @@ public class Program {
 			        	        		}
 			        	        	}while(empreOp != 0);
 			        	        	
+			        	        	break;
+			        	        case 3://imposto de renda
+			        	        	break;
+			        	        case 4://pagamento 
+			        	        	do {
+			        	        		System.out.println("\n---PAGAMENTOS---");
+			        	    			System.out.println("(1) - Pix");
+			        	    			System.out.println("(2) - Boleto");
+			        	    			System.out.println("(3) - Cartão");
+			        	    			System.out.println("(0) - Sair");
+			        	    			System.out.println("----------------");
+			        	    			System.out.print("Digite aqui -->: ");
+			        	    			pagOp = sc.nextInt();
+			        	    			switch (pagOp) {
+			        	    			case 1:
+			        	    				
+			        	    				System.out.println("\n---PIX---");
+			        	    				System.out.println("Tipo de chave:");
+			        	    				System.out.println("(1) - CPF/CNPJ");
+			        	    				System.out.println("(2) - Chave aleatória");
+			        	    				System.out.println("(3) - Telefone");
+			        	    				System.out.println("(4) - E-mail");
+			        	    				System.out.println("(0) - Voltar");
+			        	    				System.out.println("----------------");
+			        	    				System.out.print("Digite aqui -->: ");
+			        	    				tipo = sc.nextInt();
+
+			        	    				switch (tipo) {
+			        	    				case 1:
+			        	    					System.out.print("\nDigite aqui o CPF/CNPJ: ");
+			        	    					cpf = sc.next();
+			        	    					System.out.print("Qual o valor da transferência?: ");
+			        	    					valorPag = sc.nextDouble();
+			        	    					Pagamentos.testeSaldo(valorPag, newUser);
+			        	    					break;
+
+			        	    				case 2:
+			        	    					System.out.print("\nDigite aqui a Chave aleatória: ");
+			        	    					chave = sc.next();
+			        	    					System.out.print("Qual o valor da transferência?: ");
+			        	    					valorPag = sc.nextDouble();
+			        	    					Pagamentos.testeSaldo(valorPag, newUser);
+			        	    					break;
+			        	    				case 3:
+			        	    					System.out.print("\nDigite aqui a número de telefone: ");
+			        	    					chave = sc.next();
+			        	    					System.out.print("Qual o valor da transferência?: ");
+			        	    					valorPag = sc.nextDouble();
+			        	    					Pagamentos.testeSaldo(valorPag, newUser);
+			        	    					break;
+			        	    				case 4:
+			        	    					System.out.print("\nDigite aqui o e-mail: ");
+			        	    					chave = sc.next();
+			        	    					System.out.print("Qual o valor da transferência?: ");
+			        	    					valorPag = sc.nextDouble();
+			        	    					Pagamentos.testeSaldo(valorPag, newUser);
+			        	    					break;
+			        	    				case 0:
+			        	    					break;
+			        	    				default:
+			        	    					System.out.println("\nOpção inválida!\n");
+			        	    					break;
+			        	    				}
+			        	    				break;
+			        	    				
+			        	    			case 2:
+			        	    				String p1, p2, p3, p4, p5;
+			        	    				System.out.println("\n---BOLETO---");
+			        	    				System.out.println("Novo pagamento:");
+			        	    				System.out.print("Digite a 1ª parte: ");
+			        	    				p1 = sc.next();
+			        	    				System.out.print("Digite a 2ª parte: ");
+			        	    				p2 = sc.next();
+			        	    				System.out.print("Digite a 3ª parte: ");
+			        	    				p3 = sc.next();
+			        	    				System.out.print("Digite a 4ª parte: ");
+			        	    				p4 = sc.next();
+			        	    				System.out.print("Digite a 5ª parte: ");
+			        	    				p5 = sc.next();
+			        	    				System.out.println("\n(1) - Continuar");
+			        	    				System.out.println("(0) - Voltar");
+			        	    				System.out.println("----------------");
+			        	    				System.out.print("Digite aqui -->: ");
+			        	    				voltar = sc.nextInt();
+
+			        	    				switch (voltar) {
+			        	    				case 1:
+			        	    					System.out.print("Qual o valor da transferência?: ");
+			        	    					valorPag = sc.nextDouble();
+			        	    					Pagamentos.testeSaldo(valorPag, newUser);
+			        	    					break;
+			        	    				case 0:
+			        	    					break;
+			        	    				default:
+			        	    					System.out.println("\nOpção inválida!\n");
+			        	    					break;
+			        	    				}
+			        	    				break;
+			        	    			case 3:
+			        	    				String nome, numero, datavali;
+			        	    				int cvv;
+			        	    				System.out.println("\n---CARTÃO---");
+			        	    				System.out.println("Novo pagamento:");
+			        	    				System.out.print("Qual o nome do titular?: ");
+			        	    				nome = sc.next();
+			        	    				System.out.print("Qual o número do cartão?: ");
+			        	    				numero = sc.next();
+			        	    				System.out.print("Qual a data de validade?: ");
+			        	    				datavali = sc.next();
+			        	    				System.out.print("Qual o CVV?: ");
+			        	    				cvv = sc.nextInt();
+			        	    				
+			        	    				System.out.print("Qual o valor da transferência?: ");
+		        	    					valorPag = sc.nextDouble();
+		        	    					Pagamentos.testeSaldo(valorPag, newUser);
+
+			        	    				break;
+			        	    			case 0:
+			        	    				System.out.println("\nPagamento finalizado!");
+			        	    				break;
+			        	    			default:
+			        	    				System.out.println("\nOpção inválida!\n");
+			        	    				break;
+			        	    				
+			        	    			}
+			        	        	}while (pagOp != 0);
+			        	        	//while (pagOp != 0 || tipo != 0 || voltar != 0);
+
+			        	    			
 			        	        	break;
 			        	        default:
 			        	        	
@@ -176,9 +309,6 @@ public class Program {
 	        
 		}
 		while(op != 0);
-
-		
-		
 		sc.close();
 	}
 }

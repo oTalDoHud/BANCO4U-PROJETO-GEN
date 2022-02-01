@@ -52,7 +52,7 @@ public class Usuario {
 	public void saque(double quantia) {
 		if(quantia > this.saldo) {
 			String erro = "Você tentou sacar um valor acima do seu saldo";
-			throw new IllegalArgumentException(erro);
+			throw new IllegalStateException(erro);
 		}else {
 			this.saldo -= quantia;
 		}
