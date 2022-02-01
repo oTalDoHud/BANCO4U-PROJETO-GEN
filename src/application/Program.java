@@ -10,9 +10,9 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("---BEM VINDO AO BANCO4U---");
-		int op, limiteTentativas = 0, menuOp;
+		int op, limiteTentativas = 0, menuOp, depoOp;
 		String confirmacaoSenha;
-		Usuario newUser = new Usuario(null, null);
+		Usuario newUser = new Usuario(null, null, 200);
 		
 		do {
 			System.out.println("\n---LOGIN/CADASTRO---");
@@ -38,10 +38,9 @@ public class Program {
 		        		String senhaUser = sc.next();
 		        		//if(nickUser.equals(nick) && senhaUser.equals(senha) || nickUser.equals(cadastroUser) && senhaUser.equals(cadastroSenha)){
 		        		if(LoginConfirmacao.login(nickUser, senhaUser, admin.getName(), admin.getSenha()) 
-		        				|| LoginConfirmacao.login(nickUser, senhaUser, newUser.getName(), newUser.getSenha()) ){	
-		        			
+		        				|| LoginConfirmacao.login(nickUser, senhaUser, newUser.getName(), newUser.getSenha()) ){
+		        			System.out.println("\n---LOGIN EFETUADO--- ");
 		        			do {
-		        				System.out.println("\n---LOGIN EFETUADO--- ");
 			        			System.out.println("\n---MENU BANCO4U--- ");
 			        	        System.out.println("(1) - DEPOSITO/SAQUE/EXTRATO ");
 			        	        System.out.println("(2) - EMPRESTIMO");
@@ -52,7 +51,47 @@ public class Program {
 			        	        
 			        	        menuOp = sc.nextInt();
 			        	        switch(menuOp){
-			        	        case 1:
+			        	        case 1://depositar/sacar/extrato
+			        	        	
+			        	        		System.out.println("\n---SAQUE/DEPOSITO/EXTRATO--- ");
+			        	        	do {
+			        	        		System.out.println("(1) - Saque");
+					        	        System.out.println("(2) - Deposito");
+					        	        System.out.println("(3) - Extrato");
+					        	        System.out.println("(0) - Sair");
+					        	        System.out.println("----------------");
+					        	        System.out.print("Digite aqui -->: ");
+					        	        depoOp = sc.nextInt();
+					        	        
+					        	        switch(depoOp){
+					        	        case 1://saque
+					        	        	System.out.println("\nQuanto deseja sacar? ");
+						        	        System.out.println("----------------");
+						        	        System.out.print("Digite aqui -->: ");
+						        	        double valorSacado = sc.nextDouble();
+						        	        newUser.saque(valorSacado);
+						        	        System.out.println("\nValor sacado, seu saldo atual é de: " + newUser.getSaldo());
+					        	        	break;
+					        	        case 2://deposito
+					        	        	System.out.println("\nQuanto deseja depositar? ");
+						        	        System.out.println("----------------");
+						        	        System.out.print("Digite aqui -->: ");
+						        	        double valorDepositado = sc.nextDouble();
+						        	        newUser.deposito(valorDepositado);
+						        	        System.out.println("\nValor depositado, seu saldo atual é de: " + newUser.getSaldo());
+					        	        	break;
+					        	        case 3:
+					        	        	 System.out.println("\nSeu saldo atual é de: " + newUser.getSaldo());
+					        	        	break;
+					        	        case 0:
+					        	        	System.out.println("\nVoltando a menu");
+					        	        	break;
+					        	        default:
+					        	        	System.out.println("Entre um valor válido entre 1, 2, 3 ou 0");
+					        	        }
+					        	        
+			        	        	}while(depoOp != 0);
+			        	        	
 			        	        	break;
 			        	        case 2:
 			        	        	break;
@@ -60,9 +99,6 @@ public class Program {
 			        	        	
 			        	        }
 		        			}while(menuOp != 0);
-		        			
-		        	        
-		        			
 		        			break;
 		        		}
 		        		else {
