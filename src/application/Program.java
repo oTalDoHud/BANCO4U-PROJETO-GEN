@@ -41,7 +41,7 @@ public class Program {
 		        		if(LoginConfirmacao.login(nickUser, senhaUser, nick, senha) 
 		        				|| LoginConfirmacao.login(nickUser, senhaUser, cadastroUser, cadastroSenha) ){	
 		        			
-		        			System.out.println("LOGIN!");
+		        			System.out.println("\n---LOGIN EFETUADO--- ");
 		        			
 		        			break;
 		        		}
@@ -80,10 +80,10 @@ public class Program {
 	        		System.out.println("Usuário cadastrado com sucesso!");
 		        break;
 	        	case 0 :
-	        		
+	        		System.out.println("Obrigado por utilizar o BANCO4U");
 		        break;
 		        default:
-		        	
+		        	System.out.println("\nOpção inválida, por favor digite: 1, 2 ou 0");
 	        }
 	        
 		}
