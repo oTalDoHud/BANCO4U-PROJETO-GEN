@@ -7,7 +7,7 @@ public class Pagamentos {
 	public static void testeSaldo(double valor, Usuario newUser) {
 		if (valor > newUser.getSaldo()) {
 			//System.out.println("\nSaldo insuficiente! (Finalizando sessão...)\n");
-			String erro = "Você tentou sacar um valor acima do seu saldo";
+			String erro = "Você tentou transferir/pagar um valor acima do seu saldo";
 			throw new IllegalStateException(erro);
 		} else {
 			newUser.setSaldo(newUser.getSaldo() - valor);
