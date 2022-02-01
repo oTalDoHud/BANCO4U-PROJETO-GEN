@@ -3,6 +3,7 @@ package application;
 import java.util.Scanner;
 
 import entities.Usuario;
+import services.Emprestimo;
 import services.LoginConfirmacao;
 
 public class Program {
@@ -10,7 +11,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("---BEM VINDO AO BANCO4U---");
-		int op, limiteTentativas = 0, menuOp, depoOp;
+		int op, limiteTentativas = 0, menuOp, depoOp, empreOp, totalParcelas = 0;
 		String confirmacaoSenha;
 		Usuario newUser = new Usuario(null, null, 200);
 		
@@ -45,6 +46,7 @@ public class Program {
 			        	        System.out.println("(1) - DEPOSITO/SAQUE/EXTRATO ");
 			        	        System.out.println("(2) - EMPRESTIMO");
 			        	        System.out.println("(3) - IMPOSTO DE RENDA FÁCIL");
+			        	        System.out.println("(4) - PAGAMENTOS");
 			        	        System.out.println("(0) - Sair");
 			        	        System.out.println("----------------");
 			        	        System.out.print("Digite aqui -->: ");
@@ -93,7 +95,37 @@ public class Program {
 			        	        	}while(depoOp != 0);
 			        	        	
 			        	        	break;
-			        	        case 2:
+			        	        case 2://EMPRESTIMO
+			        	        	System.out.println("\n---EMPRESTIMO--- ");
+			        	        	do {
+			        	        		System.out.println("Digite um valor para simulação de emprestimo ou 0 para sair");
+			        	        		System.out.println("----------------");
+					        	        System.out.print("Digite aqui -->: ");
+			        	        		empreOp = sc.nextInt();
+			        	        		
+			        	        		if(empreOp == 0) {
+			        	        			break;
+			        	        		}
+			        	        		
+			        	        		if(empreOp != 0) {
+			        	        			System.out.println("Digite em quantas parcelas deseja pagar");
+				        	        		System.out.println("----------------");
+						        	        System.out.print("Digite aqui -->: ");
+						        	        totalParcelas = sc.nextInt();
+			        	        		}
+			        	        		
+			        	        		if(empreOp <= 5000 && totalParcelas >= 12 && totalParcelas <= 60) {
+			        	        			System.out.println(Emprestimo.parcelas(empreOp, totalParcelas));
+			        	        			break;
+			        	        		}else {
+			        	        			System.out.println("Valor excede R$: 5000,00 ou o número de parcelas não é válido, por favor procure uma agência");
+			        	        		}
+			        	        		
+			        	        		if(empreOp == 0) {
+			        	        			System.out.println("Voltando ao menu");
+			        	        		}
+			        	        	}while(empreOp != 0);
+			        	        	
 			        	        	break;
 			        	        default:
 			        	        	
